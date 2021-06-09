@@ -36,6 +36,7 @@ class BotOptions:
         opts = webdriver.FirefoxOptions()
         opts.headless = behead
         dpath = driver_path
+
         if sys.platform == "win32":
             dpath += ".exe"
         return webdriver.Firefox(options=opts, executable_path=dpath)
@@ -72,6 +73,9 @@ class BotMaker:
         elif browser == "Chrome":
             self.driver = bot_ops.setup_chrome(chrome_driver, behead, page_load_strategy=page_load_strategy)
         self.DEFAULT_WAIT = 10
+
+    def create_driver_wait(self, secs):
+        return WebDriverWait(self.driver, secs)
 
     def move(self, link):
         """ Move on to certian link. """
